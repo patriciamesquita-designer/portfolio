@@ -543,9 +543,9 @@ body {
         padding: 1.25rem 1rem;
     }
     
-    /* Espaço para o cabeçalho absoluto */
+    /* Espaço dinâmico para o cabeçalho absoluto de duas linhas */
     .main-content {
-        margin-top: 9rem;
+        margin-top: 9.5rem;
     }
 
     .header-container {
@@ -553,21 +553,21 @@ body {
         gap: 1rem;
     }
     
-    /* Força EXATAMENTE 3 itens em cima e 2 embaixo centralizados */
+    /* Força EXATAMENTE 3 itens em cima e 2 embaixo centralizados via Grid */
     .nav-menu {
         width: 100%;
     }
 
     .nav-menu > .nav-list {
         display: grid;
-        grid-template-columns: repeat(6, 1fr); /* Divide em 6 colunas invisíveis para simetria */
+        grid-template-columns: repeat(6, 1fr); 
         gap: 0.75rem 0rem;
         padding: 0;
         width: 100%;
         list-style-type: none;
     }
 
-    /* Aloca os 3 primeiros itens ocupando 2 colunas cada na primeira linha */
+    /* Primeira Linha: Sobre, Projetos e Processo */
     .nav-menu > .nav-list > li:nth-child(1),
     .nav-menu > .nav-list > li:nth-child(2),
     .nav-menu > .nav-list > li:nth-child(3) {
@@ -575,13 +575,12 @@ body {
         text-align: center;
     }
 
-    /* Aloca o quarto item iniciando na segunda coluna da linha de baixo */
+    /* Segunda Linha: Softwares e Contato centralizados */
     .nav-menu > .nav-list > li:nth-child(4) {
         grid-column: 2 / span 2;
         text-align: center;
     }
 
-    /* Aloca o quinto item logo ao lado na linha de baixo */
     .nav-menu > .nav-list > li:nth-child(5) {
         grid-column: 4 / span 2;
         text-align: center;
@@ -592,16 +591,34 @@ body {
         font-weight: 600;
     }
 
-    /* AJUSTE DAS IMAGENS: Ocupa todo o espaço e mantém proporções ideais no celular */
-    .project-media-wrapper {
+    /* ----------------------------------------------------------------------
+       AJUSTE SEPARADO POR CASO DAS CAPAS DOS PROJETOS (MOBILE)
+       ---------------------------------------------------------------------- */
+    /* Caso 1: Thyself (1º card) e Elefante (2º card) - Imagens Widescreen Horizontais */
+    .projects-grid > .project-card:nth-child(1) .project-media-wrapper,
+    .projects-grid > .project-card:nth-child(2) .project-media-wrapper {
         height: auto;
-        aspect-ratio: 4 / 3; /* Proporção ideal para valorizar mockups verticais e horizontais no mobile */
+        aspect-ratio: 16 / 9; /* Mantém a proporção exata do monitor do computador */
     }
     
-    .project-cover-img {
-        object-fit: cover; /* Faz a imagem preencher o card de forma contínua e rica */
-        opacity: 1;
+    .projects-grid > .project-card:nth-child(1) .project-cover-img,
+    .projects-grid > .project-card:nth-child(2) .project-cover-img {
+        object-fit: contain; /* Encaixa a imagem inteira sem realizar nenhum corte lateral */
+        background-color: #151a22; /* Fundo escuro para acabamento estético sofisticado */
     }
+
+    /* Caso 2: Pinterest (3º card) e outros - Imagens Quadradas/Verticais Preenchidas */
+    .projects-grid > .project-card:nth-child(3) .project-media-wrapper,
+    .projects-grid > .project-card:nth-child(4) .project-media-wrapper {
+        height: auto;
+        aspect-ratio: 4 / 3; /* Proporção ideal para exibir mockups volumosos sem bordas vazias */
+    }
+    
+    .projects-grid > .project-card:nth-child(3) .project-cover-img,
+    .projects-grid > .project-card:nth-child(4) .project-cover-img {
+        object-fit: cover; /* Estende e preenche o card completamente, destacando a papelaria */
+    }
+    /* ---------------------------------------------------------------------- */
 
     /* Seção Sobre */
     .hero-section {
